@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Pedido confirmado | TechStore</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>TechStore</h1>
+
+    <nav>
+
+        <a href="/">
+            Início
+        </a>
+
+        <a href="/produtos">
+            Produtos
+        </a>
+
+    </nav>
+
+</header>
+
+
+<main>
+
+    <div class="sucesso">
+
+        <h2>
+            Pedido realizado!
+        </h2>
+
+        <p>
+            Obrigado pela sua compra,
+            <strong>{{ nome }}</strong>.
+        </p>
+
+        <p>
+            Seu pedido foi registrado no sistema.
+        </p>
+
+        <p>
+            Número do pedido:
+            <strong>
+                #{{ pedido_id }}
+            </strong>
+        </p>
+
+        <p>
+            Total:
+            <strong>
+                R$ {{ "%.2f"|format(total) }}
+            </strong>
+        </p>
+
+        <br>
+
+        <a
+            class="botao"
+            href="/produtos"
+        >
+            Continuar comprando
+        </a>
+
+    </div>
+
+</main>
+
+</body>
+
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Painel administrativo | TechStore</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>TechStore Admin</h1>
+
+    <nav>
+
+        <a href="/">
+            Loja
+        </a>
+
+        <a href="/produtos">
+            Produtos
+        </a>
+
+        <a href="/admin/produto">
+            Novo produto
+        </a>
+
+    </nav>
+
+</header>
+
+
+<main>
+
+    <h2>
+        Painel administrativo
+    </h2>
+
+
+    <section>
+
+        <h3>
+            Produtos cadastrados
+        </h3>
+
+        <div class="produtos">
+
+            {% for produto in produtos %}
+
+                <article class="card">
+
+                    <span>
+                        {{ produto["categoria"] }}
+                    </span>
+
+                    <h3>
+                        {{ produto["nome"] }}
+                    </h3>
+
+                    <p class="preco">
+                        R$ {{ "%.2f"|format(produto["preco"]) }}
+                    </p>
+
+                </article>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+
+    <section class="pedidos">
+
+        <h3>
+            Pedidos realizados
+        </h3>
+
+
+        {% if pedidos %}
+
+            {% for pedido in pedidos %}
+
+                <article class="pedido">
+
+                    <h4>
+                        Pedido #{{ pedido["id"] }}
+                    </h4>
+
+                    <p>
+                        <strong>Cliente:</strong>
+                        {{ pedido["nome"] }}
+                    </p>
+
+                    <p>
+                        <strong>Endereço:</strong>
+                        {{ pedido["endereco"] }}
+                    </p>
+
+                    <p>
+                        <strong>Pagamento:</strong>
+                        {{ pedido["pagamento"] }}
+                    </p>
+
+                    <p>
+                        <strong>Total:</strong>
+                        R$ {{ "%.2f"|format(pedido["total"]) }}
+                    </p>
+
+                </article>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="vazio">
+
+                <h3>
+                    Nenhum pedido ainda.
+                </h3>
+
+                <p>
+                    Os pedidos realizados pelos clientes
+                    aparecerão aqui.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    </section>
+
+</main>
+
+</body>
+
+</html>

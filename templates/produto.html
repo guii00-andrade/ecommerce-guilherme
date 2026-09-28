@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>{{ produto["nome"] }} | TechStore</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>TechStore</h1>
+
+    <nav>
+
+        <a href="/">Início</a>
+
+        <a href="/produtos">
+            Produtos
+        </a>
+
+        <a href="/carrinho">
+            Carrinho
+        </a>
+
+    </nav>
+
+</header>
+
+
+<main>
+
+    <div class="produto-detalhe">
+
+        <span>
+            {{ produto["categoria"] }}
+        </span>
+
+        <h2>
+            {{ produto["nome"] }}
+        </h2>
+
+        <p class="preco grande">
+            R$ {{ "%.2f"|format(produto["preco"]) }}
+        </p>
+
+        <p>
+            Produto disponível na TechStore.
+            Adicione ao carrinho para continuar sua compra.
+        </p>
+
+        <a
+            class="botao"
+            href="/adicionar/{{ produto['id'] }}"
+        >
+            Adicionar ao carrinho
+        </a>
+
+        <a
+            class="botao-secundario"
+            href="/produtos"
+        >
+            Voltar aos produtos
+        </a>
+
+    </div>
+
+</main>
+
+</body>
+
+</html>

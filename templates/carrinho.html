@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Carrinho | TechStore</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>TechStore</h1>
+
+    <nav>
+
+        <a href="/">Início</a>
+
+        <a href="/produtos">
+            Produtos
+        </a>
+
+        <a href="/carrinho">
+            Carrinho
+        </a>
+
+        {% if session.get("usuario_nome") %}
+
+            <span>
+                Olá, {{ session["usuario_nome"] }}
+            </span>
+
+            <a href="/logout">
+                Sair
+            </a>
+
+        {% else %}
+
+            <a href="/login">
+                Entrar
+            </a>
+
+        {% endif %}
+
+    </nav>
+
+</header>
+
+
+<main>
+
+    <h2>
+        Seu carrinho
+    </h2>
+
+
+    {% if produtos %}
+
+        <div class="carrinho">
+
+            {% for item in produtos %}
+
+                <div class="item-carrinho">
+
+                    <div>
+
+                        <span>
+                            {{ item["produto"]["categoria"] }}
+                        </span>
+
+                        <h3>
+                            {{ item["produto"]["nome"] }}
+                        </h3>
+
+                        <p>
+                            R$ {{ "%.2f"|format(item["produto"]["preco"]) }}
+                            por unidade
+                        </p>
+
+                    </div>
+
+
+                    <div>
+
+                        <p>
+                            Quantidade:
+                        </p>
+
+                        <a
+                            class="botao-secundario"
+                            href="/diminuir/{{ item['produto']['id'] }}"
+                        >
+                            −
+                        </a>
+
+                        <strong>
+                            {{ item["quantidade"] }}
+                        </strong>
+
+                        <a
+                            class="botao-secundario"
+                            href="/aumentar/{{ item['produto']['id'] }}"
+                        >
+                            +
+                        </a>
+
+                    </div>
+
+
+                    <div>
+
+                        <p>
+                            Subtotal:
+                        </p>
+
+                        <strong>
+                            R$ {{ "%.2f"|format(item["subtotal"]) }}
+                        </strong>
+
+                        <br>
+
+                        <a
+                            class="botao-remover"
+                            href="/remover/{{ item['produto']['id'] }}"
+                        >
+                            Remover
+                        </a>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <div class="total">
+
+            <p>
+                {{ quantidade_total }} item(ns) no carrinho
+            </p>
+
+            <h2>
+                Total:
+                R$ {{ "%.2f"|format(total) }}
+            </h2>
+
+            <a
+                class="botao"
+                href="/checkout"
+            >
+                Finalizar compra
+            </a>
+
+            <a
+                class="botao-secundario"
+                href="/limpar-carrinho"
+            >
+                Limpar carrinho
+            </a>
+
+        </div>
+
+    {% else %}
+
+        <div class="vazio">
+
+            <h3>
+                Seu carrinho está vazio.
+            </h3>
+
+            <p>
+                Explore nossos produtos e encontre
+                algo para você.
+            </p>
+
+            <a
+                class="botao"
+                href="/produtos"
+            >
+                Explorar produtos
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</main>
+
+</body>
+
+</html>

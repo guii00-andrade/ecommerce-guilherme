@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="TechStore - Tecnologia, periféricos e acessórios.">
+
+    <title>TechStore | Tecnologia</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header>
+
+    <h1>TechStore</h1>
+
+    <nav>
+
+        <a href="/">Início</a>
+        <a href="/produtos">Produtos</a>
+        <a href="/carrinho">Carrinho</a>
+
+        {% if session.get("usuario_nome") %}
+
+            <span>
+                Olá, {{ session["usuario_nome"] }}
+            </span>
+
+            <a href="/logout">Sair</a>
+
+        {% else %}
+
+            <a href="/login">Entrar</a>
+
+        {% endif %}
+
+    </nav>
+
+</header>
+
+
+<main>
+
+    <section class="hero">
+
+        <h2>
+            Tecnologia para elevar sua experiência.
+        </h2>
+
+        <p>
+            Encontre periféricos, monitores e acessórios
+            para computador em um só lugar.
+        </p>
+
+        <a class="botao" href="/produtos">
+            Explorar produtos
+        </a>
+
+    </section>
+
+
+    <section>
+
+        <h2>Produtos em destaque</h2>
+
+        <div class="produtos">
+
+            {% for produto in produtos[:4] %}
+
+                <article class="card">
+
+                    <span>
+                        {{ produto["categoria"] }}
+                    </span>
+
+                    <h3>
+                        {{ produto["nome"] }}
+                    </h3>
+
+                    <p class="preco">
+                        R$ {{ "%.2f"|format(produto["preco"]) }}
+                    </p>
+
+                    <a
+                        class="botao"
+                        href="/produto/{{ produto['id'] }}"
+                    >
+                        Ver produto
+                    </a>
+
+                </article>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+
+    <section>
+
+        <h2>Por que escolher a TechStore?</h2>
+
+        <div class="produtos">
+
+            <article class="card">
+
+                <span>01</span>
+
+                <h3>
+                    Produtos selecionados
+                </h3>
+
+                <p>
+                    Produtos de tecnologia escolhidos
+                    para diferentes necessidades.
+                </p>
+
+            </article>
+
+
+            <article class="card">
+
+                <span>02</span>
+
+                <h3>
+                    Compra simples
+                </h3>
+
+                <p>
+                    Encontre o produto, adicione ao carrinho
+                    e finalize seu pedido.
+                </p>
+
+            </article>
+
+
+            <article class="card">
+
+                <span>03</span>
+
+                <h3>
+                    Experiência segura
+                </h3>
+
+                <p>
+                    Seus pedidos ficam registrados
+                    no sistema da loja.
+                </p>
+
+            </article>
+
+        </div>
+
+    </section>
+
+</main>
+
+</body>
+
+</html>

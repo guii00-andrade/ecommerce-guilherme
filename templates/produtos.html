@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Confira todos os produtos da TechStore."
+    >
+
+    <title>Produtos | TechStore</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>TechStore</h1>
+
+    <nav>
+
+        <a href="/">Início</a>
+
+        <a href="/produtos">
+            Produtos
+        </a>
+
+        <a href="/carrinho">
+            Carrinho
+        </a>
+
+        {% if session.get("usuario_nome") %}
+
+            <span>
+                Olá, {{ session["usuario_nome"] }}
+            </span>
+
+            <a href="/logout">
+                Sair
+            </a>
+
+        {% else %}
+
+            <a href="/login">
+                Entrar
+            </a>
+
+        {% endif %}
+
+    </nav>
+
+</header>
+
+
+<main>
+
+    <h2>Todos os produtos</h2>
+
+    {% if produtos %}
+
+        <div class="produtos">
+
+            {% for produto in produtos %}
+
+                <article class="card">
+
+                    <span>
+                        {{ produto["categoria"] }}
+                    </span>
+
+                    <h3>
+                        {{ produto["nome"] }}
+                    </h3>
+
+                    <p class="preco">
+                        R$ {{ "%.2f"|format(produto["preco"]) }}
+                    </p>
+
+                    <a
+                        class="botao"
+                        href="/produto/{{ produto['id'] }}"
+                    >
+                        Ver produto
+                    </a>
+
+                </article>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="vazio">
+
+            <h3>
+                Nenhum produto encontrado.
+            </h3>
+
+            <p>
+                Ainda não existem produtos cadastrados.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</main>
+
+</body>
+
+</html>

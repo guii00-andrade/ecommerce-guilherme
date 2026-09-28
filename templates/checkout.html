@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Checkout | TechStore</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>TechStore</h1>
+
+    <nav>
+
+        <a href="/">
+            Início
+        </a>
+
+        <a href="/produtos">
+            Produtos
+        </a>
+
+        <a href="/carrinho">
+            Carrinho
+        </a>
+
+    </nav>
+
+</header>
+
+
+<main>
+
+    <div class="formulario">
+
+        <h2>
+            Finalizar compra
+        </h2>
+
+
+        <div class="resumo">
+
+            <h3>
+                Resumo do pedido
+            </h3>
+
+
+            {% for item in produtos %}
+
+                <p>
+
+                    {{ item["produto"]["nome"] }}
+
+                    × {{ item["quantidade"] }}
+
+                    —
+
+                    R$ {{ "%.2f"|format(item["subtotal"]) }}
+
+                </p>
+
+            {% endfor %}
+
+
+            <h3>
+
+                Total:
+
+                R$ {{ "%.2f"|format(total) }}
+
+            </h3>
+
+        </div>
+
+
+        <form method="POST">
+
+            <label for="nome">
+                Nome completo
+            </label>
+
+            <input
+                type="text"
+                id="nome"
+                name="nome"
+                placeholder="Nome para entrega"
+                required
+            >
+
+
+            <label for="endereco">
+                Endereço de entrega
+            </label>
+
+            <input
+                type="text"
+                id="endereco"
+                name="endereco"
+                placeholder="Rua, número e bairro"
+                required
+            >
+
+
+            <label for="pagamento">
+                Forma de pagamento
+            </label>
+
+            <select
+                id="pagamento"
+                name="pagamento"
+                required
+            >
+
+                <option value="">
+                    Selecione uma opção
+                </option>
+
+                <option value="Pix">
+                    Pix
+                </option>
+
+                <option value="Cartão">
+                    Cartão
+                </option>
+
+                <option value="Boleto">
+                    Boleto
+                </option>
+
+            </select>
+
+
+            <button type="submit">
+                Confirmar pedido
+            </button>
+
+        </form>
+
+    </div>
+
+</main>
+
+</body>
+
+</html>

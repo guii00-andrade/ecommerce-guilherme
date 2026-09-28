@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Novo produto | TechStore</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>TechStore Admin</h1>
+
+    <nav>
+
+        <a href="/">
+            Loja
+        </a>
+
+        <a href="/produtos">
+            Produtos
+        </a>
+
+        <a href="/admin">
+            Painel
+        </a>
+
+    </nav>
+
+</header>
+
+
+<main>
+
+    <div class="formulario">
+
+        <h2>
+            Cadastrar produto
+        </h2>
+
+        <form method="POST">
+
+            <label for="nome">
+                Nome do produto
+            </label>
+
+            <input
+                type="text"
+                id="nome"
+                name="nome"
+                placeholder="Ex.: Teclado Mecânico"
+                required
+            >
+
+
+            <label for="preco">
+                Preço
+            </label>
+
+            <input
+                type="number"
+                id="preco"
+                name="preco"
+                placeholder="0.00"
+                step="0.01"
+                min="0"
+                required
+            >
+
+
+            <label for="categoria">
+                Categoria
+            </label>
+
+            <input
+                type="text"
+                id="categoria"
+                name="categoria"
+                placeholder="Ex.: Periféricos"
+                required
+            >
+
+
+            <button type="submit">
+                Cadastrar produto
+            </button>
+
+        </form>
+
+    </div>
+
+</main>
+
+</body>
+
+</html>
